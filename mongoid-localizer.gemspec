@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Mongoid::Localizer::VERSION
   spec.authors       = ["Josef Šimánek"]
   spec.email         = ["retro@ballgag.cz"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Globalize inspired Mongoid localized behaviour}
+  spec.summary       = %q{"Globalize" for Mongoid}
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "mongoid", "> 3.0"
   spec.add_dependency "i18n"
 
-  spec.add_development_dependency "bundler", "~> 1.3"
+  spec.add_development_dependency "bundler", "> 1.0"
+  spec.add_development_dependency "rspec", "~> 2.13.0"
   spec.add_development_dependency "rake"
 end
