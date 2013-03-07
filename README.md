@@ -1,12 +1,18 @@
-# Mongoid::Localizer
+# Mongoid::Localizer [![Build Status](https://travis-ci.org/simi/mongoid-localizer.png?branch=master)](https://travis-ci.org/simi/mongoid-localizer)
 
-TODO: Write a gem description
+[Globalize](https://github.com/svenfuchs/globalize3) alike behaviour for Mongoid localized models.
+
+You can switch localized columns locale context without changing I18n.locale.
+
+Good for administrations, where you want to edit localized documents without changing language for whole page.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'mongoid-localizer'
+```ruby
+gem 'mongoid-localizer'
+```
 
 And then execute:
 
@@ -18,7 +24,26 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+Mongoid::Localizer.locale # => I18n.locale for default
+
+Mongoid::Localizer.locale = :en
+dictionary = Dictionary.create(name: "Otto", description: "English")
+Mongoid::Localizer.locale = :de
+dictionary.description = "Deutsch"
+dictionary.save
+
+Mongoid::Localizer.locale = :en
+dictionary.description # => "English"
+Mongoid::Localizer.locale = :de
+dictionary.description # => "Deutsch"
+
+Mongoid::Localizer.with_locale(:en) do
+  dictionary.description # => "English"
+end
+
+dictionary.description # => "Deutsch"
+```
 
 ## Contributing
 
