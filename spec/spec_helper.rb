@@ -4,10 +4,8 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), "..", "lib"))
 MODELS = File.join(File.dirname(__FILE__), "app/models")
 $LOAD_PATH.unshift(MODELS)
 
-require "mongoid"
-require "i18n"
-require "mongoid/localizer"
 require "rspec"
+require "mongoid/localizer"
 
 def database_id
   "mongoid_localizer_test"

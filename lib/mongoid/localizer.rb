@@ -1,3 +1,6 @@
+require 'mongoid'
+require 'i18n'
+
 module Mongoid
   class Localizer
     class << self
