@@ -18,7 +18,7 @@ describe Mongoid::Localizer do
     end
 
     describe "switch locale and save" do
-      let(:dictionary) do
+      let!(:dictionary) do
         d = Dictionary.create(name: "Otto", description: "English")
         Mongoid::Localizer.locale = :de
         d.description = "Deutsch"
@@ -32,6 +32,11 @@ describe Mongoid::Localizer do
         expect(dictionary.description).to eq("English")
         Mongoid::Localizer.locale = :de
         expect(dictionary.description).to eq("Deutsch")
+      end
+
+      it "finds proper document by localized fields in" do
+        Mongoid::Localizer.locale = :de
+        expect(Dictionary.in(description: "Deutsch").entries).to eq([dictionary])
       end
     end
 
