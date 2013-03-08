@@ -11,14 +11,14 @@ Good for administrations, where you want to edit localized documents without cha
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'mongoid-localizer'
+gem 'mongoid-localizer', github: 'simi/mongoid-localizer'
 ```
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
+Or install it yourself as (not released yet):
 
     $ gem install mongoid-localizer
 
