@@ -2,7 +2,7 @@
 
 [Globalize](https://github.com/svenfuchs/globalize3) alike behaviour for Mongoid localized models.
 
-You can switch localized columns locale context without changing I18n.locale.
+You can switch localized columns locale context without changing ```I18n.locale```.
 
 Good for administrations, where you want to edit localized documents without changing language for whole page.
 
