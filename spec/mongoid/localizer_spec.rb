@@ -17,6 +17,21 @@ describe Mongoid::Localizer do
       I18n.locale = Mongoid::Localizer.locale = :en
     end
 
+    describe "fallback" do
+      it "resolve fallback" do
+        I18n.should_receive(:respond_to?).twice.with(:fallbacks).and_return(true)
+        I18n.stub(:fallbacks).and_return({})
+        I18n.fallbacks[:de] = [:de, :en]
+        I18n.fallbacks[:en] = [:en, :de]
+
+        Dictionary.create(name: "Otto", description: "English")
+        d = Dictionary.last
+        expect(d.description).to eq("English")
+        I18n.locale = Mongoid::Localizer.locale = :de
+        expect(d.description).to eq("English")
+      end
+    end
+
     describe "switch locale and save" do
       let!(:dictionary) do
         d = Dictionary.create(name: "Otto", description: "English")
