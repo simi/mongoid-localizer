@@ -45,6 +45,24 @@ end
 dictionary.description # => "Deutsch"
 ```
 
+## Preventing I18n.fallbacks
+
+```ruby
+class Dictionary
+  include Mongoid::Document
+  field :name, type: String
+  field :description, type: String, localize: true
+  field :slug, type: String, localize: {prevent_fallback: true}
+end
+
+Mongoid::Localizer.locale = :en
+dictionary = Dictionary.create(name: "Otto", description: "English", slug: "english")
+
+Mongoid::Localizer.locale = :de
+dictionary.description => "English"
+dictionary.slug => nil
+```
+
 ## Contributing
 
 1. Fork it

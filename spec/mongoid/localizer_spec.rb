@@ -18,17 +18,27 @@ describe Mongoid::Localizer do
     end
 
     describe "fallback" do
-      it "resolve fallback" do
+      before(:each) do
         I18n.should_receive(:respond_to?).twice.with(:fallbacks).and_return(true)
         I18n.stub(:fallbacks).and_return({})
         I18n.fallbacks[:de] = [:de, :en]
         I18n.fallbacks[:en] = [:en, :de]
 
-        Dictionary.create(name: "Otto", description: "English")
-        d = Dictionary.last
+        Dictionary.create(name: "Otto", description: "English", slug: "otto")
+      end
+
+      let(:d) { Dictionary.last }
+
+      it "resolve fallback" do
         expect(d.description).to eq("English")
         I18n.locale = Mongoid::Localizer.locale = :de
         expect(d.description).to eq("English")
+      end
+
+      it "will skip fallback when prevet_fallback is true" do
+        expect(d.slug).to eq("otto")
+        I18n.locale = Mongoid::Localizer.locale = :de
+        expect(d.slug).to eq(nil)
       end
     end
 
