@@ -35,7 +35,7 @@ describe Mongoid::Localizer do
         expect(d.description).to eq("English")
       end
 
-      it "will skip fallback when prevet_fallback is true" do
+      it "will skip fallback when prevent_fallback is true" do
         expect(d.slug).to eq("otto")
         I18n.locale = Mongoid::Localizer.locale = :de
         expect(d.slug).to eq(nil)
